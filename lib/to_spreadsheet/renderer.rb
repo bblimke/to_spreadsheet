@@ -33,11 +33,11 @@ module ToSpreadsheet
       context.assoc! spreadsheet, doc
       doc.css('table:not(.no_xls)').each_with_index do |xml_table, i|
         sheet = spreadsheet.add_worksheet(
-            name: "Sheet #{i + 1}"
+            name: xml_table['name'] || "Sheet #{i + 1}"
         )
         # Sheet <-> %table association
         context.assoc! sheet, xml_table
-        xml_table.css('tr:not(.no_xls)').each do |row_node|
+        xml_table.css('tr').each do |row_node|
           xls_row = sheet.add_row
           # Row <-> %tr association
           context.assoc! xls_row, row_node
