@@ -2,9 +2,8 @@ language: ruby
 cache: bundler
 bundler_args: --path ../../vendor/bundle
 rvm:
-  - 2.2.2
-  - 1.9.3
-  - jruby
+  - 2.3.1
+  - jruby-9000
 gemfile:
   - spec/gemfiles/Gemfile.rails-3.2
   - spec/gemfiles/Gemfile.rails-4.0
@@ -12,3 +11,8 @@ gemfile:
   - spec/gemfiles/Gemfile.rails-4.2
   - Gemfile
 script: bundle exec rspec
+
+matrix:
+  exclude:
+  - rvm: jruby-9000
+    gemfile: Gemfile
